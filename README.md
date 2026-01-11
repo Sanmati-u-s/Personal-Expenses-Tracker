@@ -39,7 +39,7 @@ A modern and intuitive personal expense tracking application built to help you m
 ### Deployment
 - Vercel
 
-## 🚀 Live Demo
+### 🚀 Live Demo
 https://personal-expenses-tracker-gamma.vercel.app/ 
 
 ## ⚙️ Setup & Installation
