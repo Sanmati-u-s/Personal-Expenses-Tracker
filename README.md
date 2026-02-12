@@ -1,5 +1,5 @@
 # SpendWise - Personal Expenses Tracker
-
+>Note: This project is still under active development!
 A modern and intuitive personal expense tracking application built to help you manage your finances efficiently.
 
 ## 🚀 Key Features
