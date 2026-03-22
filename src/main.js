@@ -1431,6 +1431,28 @@ function showDashboard(user) {
     // Update Text
     const remaining = Math.max(limit - currentMonthExpenses, 0);
     document.getElementById('budget-status-text').textContent = `Spent: ₹ ${currentMonthExpenses.toFixed(2)} / ₹ ${limit.toFixed(2)}`;
+    
+    // Update left message below bar
+    const leftMsgEl = document.getElementById('budget-left-message');
+    if (leftMsgEl) {
+      const ratio = currentMonthExpenses / limit;
+      leftMsgEl.className = 'budget-left-message'; // Reset
+      
+      if (ratio > 1) {
+        leftMsgEl.textContent = `₹ ${(currentMonthExpenses - limit).toFixed(2)} over budget`;
+        leftMsgEl.classList.add('danger');
+      } else {
+        leftMsgEl.textContent = `₹ ${remaining.toFixed(2)} left of your budget`;
+        if (limit > 0) {
+           if (ratio >= 0.9) leftMsgEl.classList.add('danger');
+           else if (ratio >= 0.5) leftMsgEl.classList.add('warning');
+           else leftMsgEl.classList.add('safe');
+        } else {
+           leftMsgEl.classList.add('safe');
+        }
+      }
+    }
+
     const pctEl = document.getElementById('budget-percentage');
     pctEl.textContent = `${Math.round((currentMonthExpenses / limit) * 100)}%`;
 

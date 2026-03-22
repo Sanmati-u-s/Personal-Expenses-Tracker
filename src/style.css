@@ -568,6 +568,26 @@ input:checked+.slider:before {
   transition: color 0.3s ease;
 }
 
+.budget-left-message {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: right;
+  transition: all 0.3s ease;
+}
+
+.budget-left-message.safe {
+  color: #10b981; /* Success Green */
+}
+
+.budget-left-message.warning {
+  color: #f59e0b; /* Warning Orange/Yellow */
+}
+
+.budget-left-message.danger {
+  color: #ef4444; /* Danger Red */
+}
+
 .budget-message--calm {
   color: #6366f1;
 }
