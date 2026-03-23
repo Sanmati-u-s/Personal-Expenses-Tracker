@@ -36,8 +36,39 @@ const hideLoader = () => {
   if (loader) {
     loader.style.opacity = '0';
     loader.style.visibility = 'hidden';
-    setTimeout(() => loader.remove(), 400);
   }
+};
+
+const showLoader = (text = "Securing your vault...") => {
+  const loader = document.getElementById('loader');
+  if (loader) {
+    const textEl = loader.querySelector('.loader-text');
+    if (textEl) textEl.textContent = text;
+    loader.style.visibility = 'visible';
+    loader.style.opacity = '1';
+  }
+};
+
+const loginMessages = [
+  "Polishing your dashboard...",
+  "Counting the savings...",
+  "Opening your piggy bank...",
+  "Gathering your money trees...",
+  "Making financial magic happen..."
+];
+
+const signupMessages = [
+  "Naming your piggy bank...",
+  "Gearing up for smart spending...",
+  "Setting your financial goals...",
+  "Growing your first money tree...",
+  "Building your budget castle..."
+];
+
+const showCoolLoader = (type = 'login') => {
+  const messages = type === 'login' ? loginMessages : signupMessages;
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  showLoader(randomMessage);
 };
 
 // Initialization
@@ -74,9 +105,11 @@ function showLogin() {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    showCoolLoader('login');
     try {
       await loginUser(email, password);
     } catch (error) {
+      hideLoader();
       alert(error.message);
     }
   });
@@ -102,11 +135,13 @@ function showSignup() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const username = e.target.username.value; // Get username
+    showCoolLoader('signup');
     try {
       await registerUser(username, email, password);
       // Reload to ensure displayName is updated in the UI
       window.location.reload();
     } catch (error) {
+      hideLoader();
       alert(error.message);
     }
   });
@@ -171,7 +206,7 @@ function showDashboard(user) {
   const profileBtn = document.getElementById('profile-btn');
   const closeProfileBtn = document.getElementById('close-profile-modal-btn');
   const profileForm = document.getElementById('edit-profile-form');
-  
+
   const profileView = document.getElementById('profile-view-mode');
   const enableEditBtn = document.getElementById('enable-edit-profile-btn');
   const cancelEditBtn = document.getElementById('cancel-edit-profile-btn');
@@ -182,13 +217,13 @@ function showDashboard(user) {
       // Always reset to view mode on open
       if (profileView) profileView.style.display = 'block';
       if (profileForm) profileForm.style.display = 'none';
-      
+
       const currentUsernameDisplay = document.getElementById('current-username-display');
       if (currentUsernameDisplay) {
-         currentUsernameDisplay.textContent = user.displayName || 'No name set';
+        currentUsernameDisplay.textContent = user.displayName || 'No name set';
       }
       if (profileForm && profileForm.username) {
-         profileForm.username.value = user.displayName || '';
+        profileForm.username.value = user.displayName || '';
       }
     });
   }
@@ -244,13 +279,13 @@ function showDashboard(user) {
           let tod = 'evening 🌙';
           if (hour < 12) tod = 'morning 🌅';
           else if (hour < 17) tod = 'afternoon ☀️';
-          
+
           greetingEl.textContent = `Good ${tod}, ${newUsername}`;
         }
-        
+
         const displayUsernameEl = document.getElementById('current-username-display');
         if (displayUsernameEl) displayUsernameEl.textContent = newUsername;
-        
+
         if (profileView) profileView.style.display = 'block';
         if (profileForm) profileForm.style.display = 'none';
 
@@ -1448,24 +1483,24 @@ function showDashboard(user) {
     // Update Text
     const remaining = Math.max(limit - currentMonthExpenses, 0);
     document.getElementById('budget-status-text').textContent = `Spent: ₹ ${currentMonthExpenses.toFixed(2)} / ₹ ${limit.toFixed(2)}`;
-    
+
     // Update left message below bar
     const leftMsgEl = document.getElementById('budget-left-message');
     if (leftMsgEl) {
       const ratio = currentMonthExpenses / limit;
       leftMsgEl.className = 'budget-left-message'; // Reset
-      
+
       if (ratio > 1) {
         leftMsgEl.textContent = `₹ ${(currentMonthExpenses - limit).toFixed(2)} over budget`;
         leftMsgEl.classList.add('danger');
       } else {
         leftMsgEl.textContent = `₹ ${remaining.toFixed(2)} left of your budget`;
         if (limit > 0) {
-           if (ratio >= 0.9) leftMsgEl.classList.add('danger');
-           else if (ratio >= 0.5) leftMsgEl.classList.add('warning');
-           else leftMsgEl.classList.add('safe');
+          if (ratio >= 0.9) leftMsgEl.classList.add('danger');
+          else if (ratio >= 0.5) leftMsgEl.classList.add('warning');
+          else leftMsgEl.classList.add('safe');
         } else {
-           leftMsgEl.classList.add('safe');
+          leftMsgEl.classList.add('safe');
         }
       }
     }
@@ -1515,11 +1550,11 @@ function showDashboard(user) {
         item.style.fontWeight = '500';
 
         if (exceedAmount > 0) {
-          item.style.color = '#dc2626'; 
+          item.style.color = '#dc2626';
           item.innerHTML = `⚠️ At this rate, you'll exceed your budget by <span style="font-weight: 700;">₹ ${exceedAmount.toFixed(0)}</span> this month`;
         } else {
           const withinAmount = limit - projectedSpend;
-          item.style.color = '#16a34a'; 
+          item.style.color = '#16a34a';
           item.innerHTML = `✅ At this rate, you'll be within your budget by <span style="font-weight: 700;">₹ ${withinAmount.toFixed(0)}</span> this month`;
         }
         insightsArea.appendChild(item);
@@ -1535,7 +1570,7 @@ function showDashboard(user) {
         const daysPassed = now.getDate();
         for (let i = 1; i <= daysPassed; i++) {
           const d = new Date(currentYear, currentMonth, i);
-          const day = d.getDay(); 
+          const day = d.getDay();
           if (day === 0 || day === 6) weekendDays++;
           else weekdayDays++;
         }
@@ -1543,10 +1578,10 @@ function showDashboard(user) {
         allExpenses
           .filter(t => t.type !== 'income' && t.date.startsWith(currentBudgetMonth))
           .forEach(t => {
-             const d = new Date(t.date);
-             const day = d.getDay();
-             if (day === 0 || day === 6) weekendSpend += t.amount;
-             else weekdaySpend += t.amount;
+            const d = new Date(t.date);
+            const day = d.getDay();
+            if (day === 0 || day === 6) weekendSpend += t.amount;
+            else weekdaySpend += t.amount;
           });
 
         const avgWeekend = weekendDays > 0 ? weekendSpend / weekendDays : 0;
@@ -1577,11 +1612,11 @@ function showDashboard(user) {
           item.style.fontSize = '0.82rem';
           item.style.fontWeight = '500';
           item.style.color = 'var(--text-color)';
-          
+
           if (category.toLowerCase().includes('food')) {
-              item.innerHTML = `<span style="color: #16a34a; font-weight:600;">Smart Suggestion:</span> Reducing food expenses by ₹50/day saves <span style="font-weight:700;">₹1500/month</span>`;
+            item.innerHTML = `<span style="color: #16a34a; font-weight:600;">Smart Suggestion:</span> Reducing food expenses by ₹50/day saves <span style="font-weight:700;">₹1500/month</span>`;
           } else {
-              item.innerHTML = `<span style="color: #16a34a; font-weight:600;">Smart Suggestion:</span> Cutting <span style="font-weight: 700;">${category}</span> budget by 10% saves you <span style="font-weight: 700;">₹ ${(topCat[1] * 0.1).toFixed(0)}</span>`;
+            item.innerHTML = `<span style="color: #16a34a; font-weight:600;">Smart Suggestion:</span> Cutting <span style="font-weight: 700;">${category}</span> budget by 10% saves you <span style="font-weight: 700;">₹ ${(topCat[1] * 0.1).toFixed(0)}</span>`;
           }
           insightsArea.appendChild(item);
         }
@@ -1638,7 +1673,7 @@ function showDashboard(user) {
     });
   }
 
-  
+
   expensesCleanup = subscribeToExpenses(user.uid, (expenses) => {
     allExpenses = expenses;
     updateFilterOptions();
