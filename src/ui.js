@@ -217,7 +217,12 @@ export const renderDashboard = (user) => {
               <div class="charts-container">
                 <div class="chart-card active" id="tab-categories">
                   <h3>Category Distribution</h3>
-                  <canvas id="pie-chart"></canvas>
+                  <div class="donut-chart-container">
+                    <div class="canvas-wrap">
+                      <canvas id="pie-chart"></canvas>
+                    </div>
+                    <div id="pie-custom-legend" class="custom-chart-legend"></div>
+                  </div>
                 </div>
                 <div class="chart-card" id="tab-trends">
                   <h3>Monthly Trends</h3>

@@ -550,17 +550,7 @@ function showDashboard(user) {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            position: 'bottom',
-            labels: {
-              usePointStyle: true,
-              padding: 10,
-              font: {
-                family: "'Outfit', sans-serif",
-                size: 13,
-                weight: '500'
-              },
-              color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim()
-            }
+            display: false
           }
         },
         cutout: '70%',
@@ -574,6 +564,24 @@ function showDashboard(user) {
         }
       }
     });
+
+    // Populate Custom Legend for Pie Chart
+    const legendContainer = document.getElementById('pie-custom-legend');
+    if (legendContainer) {
+      legendContainer.innerHTML = Object.keys(categoryCounts).map((cat, index) => {
+        const amount = categoryCounts[cat];
+        const color = pastelColors[index % pastelColors.length];
+        return `
+          <div class="legend-item">
+            <div class="legend-left">
+              <span class="legend-dot" style="background-color: ${color}"></span>
+              <span class="legend-label">${cat}</span>
+            </div>
+            <span class="legend-value">₹ ${amount.toFixed(2)}</span>
+          </div>
+        `;
+      }).join('');
+    }
 
     // 2. Bar Chart Logic (Calendar Year: Jan - Dec)
     const monthlyTotals = {};
