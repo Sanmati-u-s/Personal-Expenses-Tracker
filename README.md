@@ -1,56 +1,56 @@
-# 💸 SpendWise — Smart Personal Expense Tracker
+# SpendWise — Smart Personal Expense Tracker
 
 SpendWise is a modern web app that helps you manage your money with confidence. Track income and expenses, monitor spending patterns, and stay in control of your monthly budget — all from a clean and interactive dashboard.
 
-## 🌐 Live Demo
+## Live Demo
 
-👉 **[Try SpendWise](https://personal-expenses-tracker-gamma.vercel.app/)**
-
----
-
-## ✨ Highlights
-
-- 📌 Simple and intuitive expense tracking
-- 📊 Interactive analytics and reports with Calendar-Year selectors
-- 👤 Profile management tools for user personalization
-- 🎯 Monthly budgeting with progress indicators
-- 🔍 Fast search and transaction management tools
-- 🌗 Light/Dark theme support with responsive aesthetics
+**[Try SpendWise](https://personal-expenses-tracker-gamma.vercel.app/)**
 
 ---
 
-## 🚀 Features
+## Highlights
 
-### 🔐 Authentication & Profile
+- Simple and intuitive expense tracking
+- Interactive analytics and reports with Calendar-Year selectors
+- Profile management tools for user personalization
+- Monthly budgeting with progress indicators
+- Fast search and transaction management tools
+- Light/Dark theme support with responsive aesthetics
+
+---
+
+## Features
+
+### Authentication & Profile
 
 - Sign up and log in securely using email/password
 - Session-based authentication with Firebase
 - Update profile username instantly from the dashboard
 
-### 💰 Transactions
+### Transactions
 
 - Add income and expense entries
 - Update or delete existing transactions
 - Search transactions instantly
 - Select multiple entries for bulk delete workflows
 
-### 📈 Insights & Analytics
+### Insights & Analytics
 
 - Real-time balance, total income, and total expense metrics (Refined minimalist design)
 - Category distribution chart
 - Monthly trend chart inside 12-month calendar scopes (Prev/Next navigation arrows included to view analytics of neighboring years)
 - Income vs expense comparison chart
 
-### 🧾 Budgeting
+### Budgeting
 
 - Set monthly budget targets
 - Visual budget utilization progress
 - **Advanced Budget Insights**:
-  - 🔮 **Rate Projection**: Predicts whether you will exceed or stay within budget by month-end based on daily averages.
-  - 📊 **Habit Insight**: Identifies whether you spend significantly more on weekends vs weekdays.
-  - 💡 **Smart Suggestion**: Recommends optimal savings targets based on top categories.
+  - **Rate Projection**: Predicts whether you will exceed or stay within budget by month-end based on daily averages.
+  - **Habit Insight**: Identifies whether you spend significantly more on weekends vs weekdays.
+  - **Smart Suggestion**: Recommends optimal savings targets based on top categories.
 
-### 🎨 User Experience
+### User Experience
 
 - Responsive layout for desktop and smaller screens
 - Personalized dashboard greeting
@@ -89,8 +89,8 @@ npm install
 3. Copy the Firebase config object
 4. Update `src/firebase.js` with your Firebase credentials
 5. Enable:
-   - ✅ Authentication (Email/Password)
-   - ✅ Cloud Firestore
+   - Authentication (Email/Password)
+   - Cloud Firestore
 
 ### 4) Run the app locally
 
@@ -107,7 +107,7 @@ npm run preview
 
 ---
 
-## 📜 Available Scripts
+## Available Scripts
 
 - `npm run dev` — Start development server
 - `npm run build` — Build production assets
@@ -115,16 +115,16 @@ npm run preview
 
 ---
 
-## 🧠 Future Enhancements
+## Future Enhancements
 
-- 📤 Export data as CSV/PDF
-- 🔁 Recurring transaction support
-- 🧩 Category-wise budget caps
-- 🔑 Social login providers
-- 📱 PWA + offline support
+- Export data as CSV/PDF
+- Recurring transaction support
+- Category-wise budget caps
+- Social login providers
+- PWA + offline support
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the terms in [LICENSE](./LICENSE).
