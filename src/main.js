@@ -1674,7 +1674,8 @@ function showDashboard(user) {
 
 
   expensesCleanup = subscribeToExpenses(user.uid, (expenses) => {
-    allExpenses = expenses;
+    // Sort expenses by the transaction date (newest first)
+    allExpenses = expenses.sort((a, b) => new Date(b.date) - new Date(a.date));
     updateFilterOptions();
     updateBudgetMonthOptions(); // Update month dropdown
 
